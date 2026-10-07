@@ -1,0 +1,51 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="OH MY GOD"
+config/description="GOD IS AN AI — le centre d appels de Dieu."
+config/version="2.3.0"
+run/main_scene="res://scenes/intro.tscn"
+config/features=PackedStringArray("4.7")
+boot_splash/bg_color=Color(0.02, 0.016, 0.012, 1)
+boot_splash/stretch_mode=0
+boot_splash/image="res://splash.png"
+config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
+
+[audio]
+
+general/text_to_speech=true
+driver/enable_input=true
+
+[autoload]
+
+Loc="*res://autoload/loc.gd"
+Game="*res://autoload/game.gd"
+Profile="*res://autoload/profile.gd"
+Relay="*res://autoload/relay.gd"
+Reality="*res://autoload/reality.gd"
+Sfx="*res://autoload/sfx.gd"
+Net="*res://autoload/net.gd"
+Stream="*res://autoload/stream.gd"
+SteamNet="*res://autoload/steam_net.gd"
+Dev="*res://autoload/dev.gd"
+
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"

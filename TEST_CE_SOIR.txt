@@ -1,0 +1,41 @@
+GOD IS AN AI v2.1 — GUIDE DU PLAYTEST
+=======================================
+
+AVANT
+-----
+1. Ouvre le projet dans Godot 4.7, F5.
+2. IA : cle_api.txt (Claude) dans le dossier du projet, ou le relais (config_ia.cfg).
+   Sans IA, le jeu marche en mode hors ligne (moins drôle, mais Reality Echo
+   fonctionne quand même avec ce que vous écrivez).
+3. Micro écouté par la simulation : il faut cle_tts.txt (clé OpenAI) ou le
+   relais. Sans ça, la simulation écoute seulement le texte tapé.
+   - Solo : maintiens V pour parler (« [REC] LA SIMULATION ÉCOUTE » s'affiche
+     en haut à droite). Options > Micro > OUVERT pour le micro sans touche.
+   - Co-op : ce que vous dites dans le chat vocal est écouté.
+4. Pour repartir d'un monde vierge : Options > LA SIMULATION > réinitialiser
+   (deux clics).
+
+À OBSERVER (note tout, même les petites choses)
+------------------------------------------------
+- PREMIER ÉCHO : quelqu'un dit une niaiserie dans les premières minutes ->
+  « LA SIMULATION A ENTENDU » + la phrase. ~30 s plus tard, un fidèle appelle
+  et la CITE mot pour mot. Est-ce que tout le monde a compris ? Ça a fait rire ?
+  (Si personne ne dit rien de spécial, la simulation choisit votre meilleure
+  phrase après ~2 minutes de jeu.)
+- Vitesse : le fidèle parle-t-il assez vite après ta réplique ?
+  (Option « Fidèles plus réactifs » : OUI par défaut. Si tu as des bugs de voix
+  ou de réponses coupées, mets NON et dis-le moi.)
+- Les moments de fous rires : note l'heure et ce qui s'est passé.
+- Les moments plats : quand est-ce que quelqu'un a sorti son téléphone ?
+- Ce qui n'a pas été compris.
+
+APRÈS : ENVOIE-MOI
+------------------
+1. Tes notes (même en vrac).
+2. Le journal du jeu, qui contient les mesures de vitesse (lignes « LATENCE ») :
+   Windows : %APPDATA%\Godot\app_userdata\OH MY GOD\logs\godot.log
+   Mac     : ~/Library/Application Support/Godot/app_userdata/OH MY GOD/logs/godot.log
+   Linux   : ~/.local/share/godot/app_userdata/OH MY GOD/logs/godot.log
+   (un fichier par partie ; envoie les plus récents)
+3. Si possible, world.json (même dossier) : la mémoire de la simulation après
+   votre soirée. On verra ce qu'elle a retenu de vous.

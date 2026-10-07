@@ -1,0 +1,620 @@
+GOD IS AN AI  —  v2.3 « REALITY ECHO » (refonte style RV There Yet?)  (FR / EN)
+(anciennement « OH MY GOD! »)
+=================================
+
+OUVRIR / OPEN : Godot 4.7 > Importer / Import > project.godot > F5
+(Testé dans Godot 4.7 : le jeu démarre et une semaine complète se joue sans erreur.)
+
+-------------------------------------------------------------
+v2.3 : DIRECTION ARTISTIQUE « RV THERE YET? »
+-------------------------------------------------------------
+- Lumière chaude de fin d'après-midi : vrai ciel, soleil avec ombres
+  douces, lumière qui rebondit (SSIL ; + SDFGI en qualité Ultra),
+  brouillard doré, rendu AgX. Fini l'ambiance sombre « Lethal Company ».
+- Tout le décor passe en matières mates et douces ; plus de contours noirs.
+- Personnages plus mats, petits yeux noirs, silhouette plus dodue.
+- GROSSES MAINS EN 1re PERSONNE (marchent, tapent au clavier, tiennent
+  les objets, giflent, saluent), à la couleur de ta peau et de tes manches.
+
+-------------------------------------------------------------
+v2.2 : REFONTE ÉTAPE 1/4 — PERSONNAGES + VESTIAIRE
+-------------------------------------------------------------
+- Nouveaux personnages « pâte à modeler » façon figurines (d'après les
+  planches) : grosse tête, gros yeux 3D brillants qui clignent, sourcils
+  3D, nez, bouche animée, mains en moufle, vêtements en vraies pièces.
+- Les 12 employés : TED, NOVA, BENOÎT, ZIGGY (le stagiaire), ANGEL, MARC,
+  RAY, GUS, SOPHIE, DIEGO, LÉA, SAM. Les collègues du bureau sont eux.
+- LE VESTIAIRE (menu > Vestiaire et carrière) : choisis ton employé puis
+  personnalise : coiffures (13), lunettes, moustaches, chapeaux (auréole,
+  couronne, hélice, papier alu...), cravates (1 ou 2 !), nœud papillon,
+  bretelles, motifs, short/jupe, chaussures (pantoufles lapin, sabots...),
+  ailes, épinglettes, tasse GOD FUEL... Certains objets se débloquent
+  avec les niveaux/succès. Ta tenue est visible par les autres en co-op.
+- Pièces 3D générées par tools/gen_models.py et tools/gen_env.py
+  (formes lisses par champs de distance) ; matière « pâte » dans
+  shaders/clay.gdshader, yeux dans shaders/eye.gdshader.
+- Prochaines étapes : 2) décor bureau-cathédrale + éclairage,
+  3) musique et sons, 4) menus, interface d'appel et effets.
+
+-------------------------------------------------------------
+v2.1 : PREMIER ÉCHO GARANTI + FIDÈLES PLUS RAPIDES
+-------------------------------------------------------------
+(Voir TEST_CE_SOIR.txt pour le guide du playtest.)
+- PREMIER ÉCHO GARANTI : à chaque partie, la première idée retenue revient
+  en ~30 s (au lieu de 2 à 12 min). « LA SIMULATION A ENTENDU » + la phrase
+  à l'écran, puis un fidèle appelle et la CITE MOT POUR MOT (« Une voix dans
+  ma tête m'a dit... c'était vous ?! »). Si personne n'a rien dit de
+  spécial, la simulation prend votre meilleure phrase après ~2 min.
+  Ensuite, chaque nouvelle idée retenue fait un discret « [REC] ».
+- FIDÈLES PLUS RAPIDES : la réponse de l'IA arrive en continu ; le fidèle
+  parle dès que sa réplique est écrite (sans attendre la fin du JSON), et
+  sa voix est diffusée en audio brut dès le premier morceau (au lieu
+  d'attendre le MP3 complet). Option « Fidèles plus réactifs » pour revenir
+  à l'ancien mode. Relais mis à jour (à redéployer).
+- MICRO SOLO : respecte Options > Micro (maintenir V par défaut, ouvert ou
+  coupé) ; indicateur « [REC] LA SIMULATION ÉCOUTE ».
+- MESURES : le journal du jeu note la latence de l'IA, de la voix et de la
+  transcription (lignes LATENCE).
+
+-------------------------------------------------------------
+v2.0.1 : TESTS INTENSIFS (jouabilité et cohérence)
+-------------------------------------------------------------
+Batterie de tests : 99 tests unitaires Reality Echo (tools/reality_test.tscn),
+audit des textes FR/EN (tools/loc_audit.gd), 10+ semaines complètes en
+autoplay (solo FR/EN, monde vierge et monde persistant), co-op 2 et 3
+joueurs (client qui plante, hôte qui quitte), relais IA local avec un faux
+Claude « chaotique » (erreurs 500/429, JSON cassé, réponses lentes) et un
+faux micro. Corrigé :
+- Les phrases banales ne créent plus d'échos (« emploi », « plateau »,
+  « massacre »... étaient pris pour des idées) ; les noms des joueurs et
+  des collègues ne deviennent plus des « personnages inventés ».
+- Une même idée dite autrement (ou renommée par l'IA) amplifie l'écho
+  existant au lieu d'en créer un doublon ; idem pour les promesses.
+- Mémoire du monde robuste : fichier corrompu mis de côté, historiques et
+  lois bornés, réponses d'IA farfelues filtrées.
+- Co-op : le client reçoit TOUJOURS le monde de l'hôte (même sans
+  changement), ne garde plus le monde de l'hôte en solo ensuite, ses
+  prières comptent dans les archives, Twitch d'un client est écouté,
+  prières croisées seulement vers des joueurs chargés.
+- Relais : limites par route (le micro ne coupe plus l'IA des appels),
+  conversations longues raccourcies (plus d'erreur 413), pause de 25 s
+  après un 429, l'IA/la voix/la transcription se rétablissent seules.
+- Fuite mémoire : les objets lancés (cafés, balles, poulets) et les sons
+  3D ne s'accumulent plus (nœuds stables sur une semaine entière).
+- Solo : le micro n'écoute plus la voix du fidèle dans les haut-parleurs.
+- Réécritures : « nuit éternelle » = pénombre jouable + lampe de poche,
+  « toujours lundi » s'affiche (LUNDI n°3...), hologramme et cascade
+  suivent la Terre flottante, pigeons sans erreurs.
+- Conséquences moins envahissantes (max 2 en attente), conjoints adultes
+  et du bon genre ; un rappel garde sa propre histoire.
+- Interface : menu qui ne chevauche plus la version en 720p, archives
+  opaques, tutoriel caché pendant le choix de mission.
+
+-------------------------------------------------------------
+NOUVEAU DANS LA v2.0 : REALITY ECHO (le cœur du jeu)
+« ATTENTION À CE QUE VOUS DITES. DIEU ÉCOUTE. »
+« PRIEZ. MENTEZ. CONVAINQUEZ. VIVEZ AVEC LES CONSÉQUENCES. »
+-------------------------------------------------------------
+La simulation écoute TOUT : ce que vous écrivez aux fidèles, le chat,
+le chat vocal (co-op) ou le micro (solo), et même !echo sur Twitch.
+Vos blagues, mensonges et running gags deviennent des ÉCHOS qui
+reviennent... plus tard, et déformés.
+
+- GRAINE : « Imagine si les pigeons étaient les caméras de Dieu »
+  -> la simulation retient l'idée, qui l'a dite, quand, dans quel contexte.
+- AMPLIFICATION : plus vous en reparlez (et plus il y a de joueurs
+  différents qui en parlent), plus l'écho grossit.
+- DÉLAI : rien n'arrive tout de suite. Ça « mature » (2 à 12 min).
+- CORRUPTION : 30 % du temps, l'idée revient déformée.
+- 5 NIVEAUX, un à la fois :
+   1 Coïncidence  : un collègue en parle « par hasard »
+   2 Comportement : le stagiaire et les fidèles agissent comme ça
+   3 Tendance     : la Gazette, l'hologramme « TENDANCES » au-dessus de la Terre
+   4 Société      : un mouvement / une religion naît, annoncé par Dieu
+   5 RÉÉCRITURE   : ça devient une LOI de la simulation. Exemples visibles :
+                    la Terre du bureau devient PLATE (avec la cascade au bord),
+                    des pigeons aux yeux-caméras rouges vous suivent du regard,
+                    des chats, la nuit, la gravité qui flanche...
+- ÉCHO PERSONNEL : un nom inventé (« Gérard ») devient une vraie
+  personne... qui finit par APPELER. Le running gag devient un client.
+- MENSONGES : une promesse faite à un fidèle est retenue. Il rappelle.
+- CONSÉQUENCES : une mission réussie -> le conjoint appelle le lendemain.
+- PRIÈRES CROISÉES (co-op) : deux joueurs reçoivent le mari et la femme,
+  qui veulent l'inverse l'un de l'autre.
+- RISQUE D'EXPOSITION : si on parle fort derrière « Dieu » pendant un
+  appel, le fidèle peut l'entendre... et réagir.
+- MÉMOIRE PERSISTANTE : le monde (user://world.json) survit d'une partie
+  à l'autre. Archives : bouton « ARCHIVES DE LA SIMULATION » dans le bilan.
+- Options > LA SIMULATION : couper l'écoute du micro, voir la mémoire,
+  remettre le monde à zéro (double clic).
+- Transcription vocale : cle_tts.txt (clé OpenAI, DEV SEULEMENT) ou le
+  relais (route /v1/stt dans serveur/worker.js). Sans transcription, la
+  simulation écoute seulement le texte. Extraction des idées : Claude si
+  disponible, sinon une heuristique hors-ligne.
+- Test dev : --echotest (idées injectées, délais courts), --echoreset,
+  --echoshow, --archives.
+
+-------------------------------------------------------------
+NOUVEAU DANS LA v1.3 : CINÉMATIQUE « FILM » AVEC IMAGES IA
+-------------------------------------------------------------
+- 5 illustrations générées (GPT Image, haute qualité 2K) sur Higgsfield.
+  Télécharge-les et mets-les dans le dossier intro/ du projet avec les
+  noms indiqués dans intro/LISEZMOI_IMAGES.txt.
+- Avec les images, l'intro devient un vrai film :
+  bandes noires cinéma, zoom lent (effet Ken Burns), pluie de code
+  par-dessus la simulation, flashs, glitchs, aberration chromatique,
+  grain de pellicule, lueur, BOOM sur l'affiche, puis la révélation du
+  centre d'appels avec un téléphone qui sonne -> le menu.
+- Sans les images, l'ancienne intro 3D joue toujours.
+
+-------------------------------------------------------------
+NOUVEAU DANS LA v1.2 : LE JEU S'APPELLE « GOD IS AN AI »
+-------------------------------------------------------------
+- Nouveau titre partout : menu, fenêtre, écran de démarrage, photos des
+  moments forts, export (GOD_IS_AN_AI.exe).
+- CINÉMATIQUE D'OUVERTURE (environ 20 s, n'importe quelle touche pour
+  passer) :
+    1. pluie de code vert : « NOUS VIVONS DANS UNE SIMULATION. »
+    2. une Terre PLATE sous son dôme de verre, mur de glace, l'océan qui
+       tombe dans le vide, le soleil et la lune qui tournent au-dessus :
+       « LA TERRE EST PLATE. »
+    3. l'oeil numérique géant de Dieu entouré de circuits :
+       « DIEU... ...EST UNE IA. »
+    4. glitch, BOOM, le titre GOD IS AN AI s'écrase à l'écran,
+       « et toi, tu travailles à son centre d'appels. » -> le menu.
+- Nouveaux sons : boom de bande-annonce, glitch, bourdon, bips de texte.
+- Note : le dossier des sauvegardes garde son ancien nom
+  (app_userdata\OH MY GOD) pour ne rien perdre.
+
+-------------------------------------------------------------
+NOUVEAU DANS LA v1.1 : ORDRES DE MISSION DIVINS
+-------------------------------------------------------------
+- À chaque appel, Dieu te tend 3 CARTES SECRÈTES : FACILE (+150 $),
+  ABSURDE (+300 $) ou COMPLÈTEMENT FOU (+600 $). Exemples : lui faire
+  adopter un lama, le convaincre que Dieu est un homard, lui faire
+  épouser son aspirateur, répondre « coin coin » au téléphone...
+- Le fidèle ne connaît PAS ta mission : tu dois l'amener là, en plus de
+  le convaincre que sa honte était la bonne chose à faire. L'IA décide
+  quand il accepte.
+- MOT INTERDIT : chaque carte a un mot que tu ne peux PAS écrire
+  (souvent le mot le plus évident : « lama », « homard »...). Tu l'écris
+  = mission ratée, et Dieu se moque de toi.
+- CONSÉQUENCES : les fidèles dont tu as réussi la mission RAPPELLENT plus
+  tard pour raconter les conséquences catastrophiques (« j'ai appelé mon
+  fils Gérard... »), et ça fait la une de la Gazette le lendemain.
+- CO-OP, SABOTAGE : quand tu prends une mission, un ami (et toujours
+  l'agent de Satan) reçoit en secret ton mot interdit. Son but : te le
+  faire écrire en te parlant au micro. +200 $ s'il réussit.
+- TWITCH : le chat vote ta carte avec !1, !2 ou !3.
+- 4 nouveaux succès et un compteur de missions dans l'évaluation.
+
+-------------------------------------------------------------
+NOUVEAU DANS LA v1.0 : ON LANCE TOUT EN PLEINE FACE
+-------------------------------------------------------------
+LIVRAISON EN PLEINE TRONCHE (la nouvelle règle de la maison)
+- Les collègues ET tes amis passent des commandes : tarte à la crème,
+  beigne, poisson, pointe de pizza, agrafeuse, papier de toilette,
+  baguette, dossier... Dieu fait tomber l'objet du ciel près de l'autel.
+- On ne remet RIEN en main propre : on le LANCE AU VISAGE. SMACK !
+  La tarte et le beigne laissent une tache qui coule sur la face.
+  Si c'est TOI qui reçois une tarte, ton écran est couvert de crème.
+- Plus tu lances de loin, plus ça paie (TIR DE SNIPER à plus de 10 m).
+- Visée assistée : si une tête est presque dans ta mire, l'objet fait une
+  belle courbe jusqu'à elle.
+- N'importe quel objet lancé sur une tête fait SMACK (tasses, boules de
+  papier...). « HÉ ! J'avais rien commandé ! »
+
+PRIÈRE KARAOKÉ
+- En plein appel, le fidèle exige une chanson. Chante dans ton micro
+  (ou écris des paroles) pendant 12 s. Les collègues brandissent des
+  cartons de 0 à 10 comme au patinage artistique, et la conviction suit.
+
+MESSE DISCO
+- Parfois, la messe obligatoire tourne au party : boule disco, lumières
+  de couleur, musique disco. Il faut être à l'autel ET DANSER (émotes).
+  Ceux qui ne dansent pas sont nommés devant tout le monde.
+
+LE STAGIAIRE
+- Un nouveau collègue maladroit (casquette à hélice) se promène partout :
+  il renverse du café (flaques !), échappe des piles de papiers, te fonce
+  dedans, dit des niaiseries... et demande tout fort aux fidèles « C'EST
+  QUOI UNE SIMULATION ? » (l'exposition monte). Tu peux le gifler et lui
+  lancer des objets : il dit merci.
+
+CHAPEAU DE LA HONTE
+- Chaque soir, le pire employé de la journée est désigné. Le lendemain,
+  il porte un chapeau de cancre géant que tout le monde voit, et les
+  collègues se moquent de lui.
+
+COURSE DE CHAISES À ROULETTES
+- [R] : tu montes sur ta chaise de bureau. Ça glisse comme sur la glace,
+  Maj = turbo, Espace = saut, ça rebondit sur les murs (BANG !) et si tu
+  fonces dans un collègue : STRIKE ! Tes amis te voient surfer dessus.
+
+AUSSI
+- Nouveaux sons : musique disco, roulettes. 5 nouveaux succès.
+
+-------------------------------------------------------------
+NOUVEAU DANS LA v0.9 : FOUS RIRES
+-------------------------------------------------------------
+- [X] LA GIFLE : gifle un collègue ou un ami. Sa tête fait deux tours,
+  des étoiles tournent autour. Un collègue giflé 3 fois te la RENVOIE.
+  Si un ami te gifle, ton écran penche et tu vois des étoiles.
+- POULET EN CAOUTCHOUC (machine à collations) : clic droit = COUIC
+  (tout le monde l'entend), clic gauche = lance-le sur une tête : BONK !
+- ONOMATOPÉES DE BD en 3D partout : PAF ! BONK ! PROUT ! COUIC !
+  ALLÉLUIA ! WOOOSH !
+- CONVERSION = FÊTE : confettis, fanfare de kazoo, les collègues dansent.
+- Nouvelles émotes : [8] T-POSE qui tourne, [9] DANSE DU POULET.
+- Quand un ami glisse dans le café, son personnage tombe sur le dos,
+  les jambes en l'air.
+- GAGS DE WEBCAM pendant les appels : le fidèle tient son téléphone à
+  l'envers, colle son nez sur la caméra, reste pris avec un filtre de
+  chien, fige sur une face gênante, éternue sur l'objectif... et l'IA
+  joue le jeu.
+- Nouvelles humeurs de Dieu : JOURNÉE DES TÊTES ÉNORMES (toutes les têtes
+  doublent, même les fidèles) et FUITE D'HÉLIUM (toutes les voix du chat
+  vocal deviennent aiguës).
+- Nouveaux sons : gifle, bonk, couic, fanfare de kazoo, klaxon.
+- 2 nouveaux succès : première gifle, poulet sur la tête.
+
+-------------------------------------------------------------
+NOUVEAU DANS LA v0.8 : PRÊT POUR LA VENTE
+-------------------------------------------------------------
+CARRIÈRE ET VESTIAIRE (Menu > CARRIÈRE)
+- Chaque journée et chaque semaine donnent de l'XP. 20 niveaux, avec des
+  titres (« Stagiaire céleste » ... « Presque Dieu »).
+- 23 succès (« Renvoyé du Paradis », « Démasquer Satan », « Entendre sa
+  propre voix »...). Certains débloquent un accessoire rare.
+- 15 chapeaux (auréole, cornes du diable, papier d'alu anti-simulation,
+  mitre, viking, sorcier...) + lunettes, moustache, yeux globuleux, nez de
+  clown... Ton personnage est TOUJOURS le même (bouton NOUVEAU VISAGE pour
+  en changer) et tes amis le voient en co-op avec tes accessoires.
+- Le personnage du centre, dans le menu, c'est toi.
+
+VRAIES OPTIONS (Menu > OPTIONS, et aussi dans la pause)
+- Volume général / musique / voix, micro, échos divins, langue, qualité,
+  plein écran, synchro verticale, champ de vision, sensibilité de la
+  souris, inverser l'axe vertical, liste des touches, crédits.
+
+TUTORIEL
+- Au premier lancement, le jour 1 en solo te guide étape par étape
+  (marcher, s'asseoir, répondre, convaincre, signes divins, convertir).
+  F1 pour le passer.
+
+VENDRE LE JEU SANS DONNER TA CLÉ : LE RELAIS IA
+- Dossier serveur/ : un petit serveur (Cloudflare Workers) qui garde ta
+  clé Anthropic, limite chaque joueur et plafonne ta facture par jour.
+  Le jeu s'y connecte via config_ia.cfg. Mode d'emploi :
+  serveur/LISEZMOI_SERVEUR.txt
+- Si le relais est saturé, le jeu bascule tout seul en mode hors ligne.
+
+EXPORTER LE JEU (fichier .exe)
+- Icône, écran de démarrage et préréglages d'export inclus (Windows,
+  Linux, macOS). Dans Godot : Projet > Exporter > Windows > Exporter le
+  projet. (Godot te proposera de télécharger les « modèles d'export » la
+  première fois.)
+- cle_api.txt, cle_tts.txt, tools/ et serveur/ sont exclus de l'export
+  automatiquement : ta clé ne part jamais avec le jeu.
+- Steam : copie steam_appid.txt à côté du .exe pour tester.
+
+-------------------------------------------------------------
+NOUVEAU DANS LA v0.7
+-------------------------------------------------------------
+LES ÉCHOS DIVINS (notre système à nous)
+- Dieu ENREGISTRE le chat vocal de proximité. Plus tard dans la journée :
+  * un collègue PNJ répète une de vos phrases AVEC VOTRE VRAIE VOIX
+    (parfois ralentie en voix de démon ou accélérée en écureuil), puis
+    dit « Quoi ? J'ai rien dit. » ;
+  * ou Dieu la rejoue sur ses écrans : « LECTURE DE L'ENREGISTREMENT
+    #4271. PIÈCE À CONVICTION. »
+- LIGNE CROISÉE : pendant ton appel, la voix d'un de tes amis se glisse
+  parfois dans la ligne du fidèle... qui panique.
+- ARCHIVES DE DIEU : en fin de semaine (bouton MOMENTS FORTS), écoutez
+  la meilleure phrase de chaque joueur.
+- Vie privée : les extraits restent en mémoire, jamais sur le disque.
+  Menu > OPTIONS > ÉCHOS DIVINS : NON = ta voix n'est jamais rejouée.
+
+STEAM : INVITER SES AMIS SANS IP
+- Bouton « INVITER DES AMIS STEAM » dans le salon co-op : crée un salon
+  Steam et ouvre la fenêtre d'invitation. L'ami clique « Rejoindre » dans
+  Steam et arrive direct dans ton salon. Ton statut Steam affiche ce que
+  tu fais (« Convainc un fidèle : Patate_Volante »).
+- POUR L'ACTIVER (une fois) : dans Godot, onglet AssetLib, installe
+  « GodotSteam GDExtension » (et « GodotSteam MultiplayerPeer » si ta
+  version la sépare), puis redémarre l'éditeur. Steam doit être ouvert.
+  Sans l'extension, le bouton n'apparaît pas et le jeu marche comme avant.
+- steam_appid.txt contient 480 (l'app de test de Valve). Quand ta page
+  Steam existera, remplace 480 par ton App ID ici ET dans
+  autoload/steam_net.gd.
+
+VOIX RÉALISTES POUR LES FIDÈLES (facultatif)
+- Crée cle_tts.txt avec une ligne :  key=sk-...  (clé OpenAI)
+  Chaque fidèle a alors une vraie voix d'acteur selon sa personnalité
+  (anxieux, fâché, enfant...), avec accent québécois en français.
+  Options : url=..., model=..., voices=... (toute API compatible OpenAI).
+  Sans ce fichier : voix de Windows comme avant. Ne jamais distribuer
+  le jeu avec une clé dedans.
+
+AUSSI
+- Les photos des MOMENTS FORTS sont sauvegardées avec un bandeau
+  « OH MY GOD! » et la légende : prêtes pour TikTok / Twitter.
+- Les photos sont prises sans l'interface.
+- Menu réorganisé : les réglages sont dans OPTIONS.
+
+-------------------------------------------------------------
+NOUVEAU DANS LA v0.6 : FAIT POUR LES CLIPS
+-------------------------------------------------------------
+LE CHAT JOUE DIEU (Twitch)
+- Menu > STREAM TWITCH : entre le nom de ta chaîne > CONNECTER.
+  Aucun mot de passe, aucune clé : le jeu lit ton chat en lecture seule.
+- Tes viewers tapent :
+    !prier <confession>  (ou !pray) -> leur confession devient un fidèle
+                          qui T'APPELLE, avec leur pseudo. Tu dois les
+                          convaincre en direct. (1 confession par viewer
+                          par journée, liens et @ bloqués)
+    !signe  (!sign)       -> un signe divin tombe pendant ton appel
+    !colere / !joie       -> vote toutes les 45 s sur l'humeur de Dieu
+    !amen                 -> la foule applaudit quand le chat spamme
+- Le fil du chat s'affiche à droite de l'écran, avec les commandes, pour
+  que tes viewers les apprennent en regardant.
+- MODE STREAMER : cache ton IP dans le salon co-op.
+- Liste de mots bloqués perso : user://stream_blocklist.txt (un par ligne).
+
+DIEU T'ENTEND
+- En co-op, si tu cries dans ton micro, Dieu te remet à ta place
+  (« SILENCE DANS MA MAISON ! ») et l'exposition monte. Tout le monde
+  voit qui a crié.
+- Écho de cathédrale sur les voix de tes collègues.
+- EAU BÉNITE À L'HÉLIUM : la fontaine donne parfois une voix aiguë
+  pendant 25 s (tes amis l'entendent pour vrai).
+- PASTILLE DU DIABLE : la machine à collations donne parfois une voix
+  démoniaque grave.
+
+MOMENTS FORTS
+- Le jeu prend une photo tout seul aux meilleurs moments : pets,
+  glissades, vols d'appel, paniers, messe, viewer converti, cris,
+  avertissements. Fin de semaine > MOMENTS FORTS > SAUVEGARDER : les
+  images sont prêtes à poster.
+
+MODS
+- Dossier user://mods (le jeu y crée LISEZMOI_MODS.txt avec un exemple).
+  Ajoute des fichiers .json avec tes propres confessions, prénoms,
+  villes : partage-les avec ta communauté.
+  Windows : %APPDATA%\Godot\app_userdata\OH MY GOD\mods
+
+TESTER SANS INTERNET (développeurs)
+  python3 tools/mock_twitch.py
+  godot -- --twitch=test --twitch-url=ws://127.0.0.1:8765
+
+-------------------------------------------------------------
+NOUVEAU DANS LA v0.5 : CO-OP EN LIGNE (2 à 4 joueurs)
+-------------------------------------------------------------
+JOUER ENTRE AMIS
+- Menu > CO-OP EN LIGNE. Un joueur clique HÉBERGER, les autres entrent
+  l'IP de l'hôte et cliquent REJOINDRE. L'hôte clique COMMENCER.
+- Même réseau (même maison) : l'IP affichée chez l'hôte fonctionne direct.
+- Par Internet : l'hôte ouvre le port UDP 7777 sur son routeur, OU
+  utilisez tous Tailscale / ZeroTier / Radmin VPN (gratuits, 2 minutes)
+  et entrez l'IP donnée par ce logiciel.
+- Chaque joueur a son poste et ses propres fidèles. Le quota, l'argent,
+  l'exposition, les avertissements et la boutique sont partagés par
+  l'équipe. L'hôte fait avancer les journées.
+- Tu vois tes collègues bouger (avatar avec ton nom), et sur l'écran de
+  leur poste tu vois LEUR appel vidéo en direct.
+
+CHAT VOCAL DE PROXIMITÉ
+- [V] maintenir pour parler : seuls ceux près de toi t'entendent.
+- [B] maintenir = talkie-walkie : tout le monde t'entend (son de radio).
+- Quand tu écris dans le terminal : bouton latéral de la souris pour parler.
+- Menu > MICRO : appuyer sur V / ouvert / coupé.
+
+AGENT DE SATAN (option de l'hôte)
+- Un joueur est secrètement un traître. Il fait ses appels normalement
+  mais peut saboter : [H] panne de courant, [J] sel dans le café de Dieu,
+  [K] fuite (+exposition). À la fin de la semaine, tout le monde vote :
+  si vous le démasquez, l'équipe gagne.
+
+FOU RIRE
+- Émotes [1] à [7] (debout) : saluer, danser, rire, facepalm, prier,
+  pointer, montrer ses biceps. Les collègues réagissent.
+- COUSSIN PÉTEUR : la machine à collations en donne parfois un. Cache-le
+  sur la chaise d'un collègue (ou d'un ami...) et attends.
+- VOLER UN APPEL : quand le téléphone d'un ami sonne, va à son poste et
+  vole-lui son fidèle.
+- MESSE OBLIGATOIRE : Dieu exige que tout le monde coure à l'autel en
+  20 secondes. Les absents sont nommés devant tout le monde.
+- Le café lancé fait une FLAQUE : on glisse dedans.
+- Personnages encore plus expressifs : fou rire (yeux ^^), larmes, yeux
+  en coeur, visage rouge de colère qui fume, yeux en X, sueur, chapeaux
+  (fête, hélice qui tourne, cowboy, tuque à pompon, chef, couronne...),
+  nez de clown, noeud papillon, bedaine, taches de rousseur, gros yeux.
+- Chaque fidèle a sa propre voix (aiguë, grave, rapide, lente).
+- Nouveaux sons : rire, pet, boing, foule qui applaudit, trombone triste...
+- L'évaluation compte maintenant les pets, glissades, paniers et vols.
+
+-------------------------------------------------------------
+NOUVEAU DANS LA v0.4
+-------------------------------------------------------------
+APPEL VIDÉO : TU VOIS LE FIDÈLE
+- Pendant l'appel, le fidèle apparaît en vidéo dans SA situation : dans son
+  auto, au karaoké, chez le dentiste, en direct sur TikTok, avec sa mère
+  qui écoute derrière... (14 décors).
+- Il parle (sa bouche bouge), il cligne des yeux, il change d'expression
+  selon sa conviction (inquiet, fâché, content...).
+- Les appels conférence montrent les DEUX fidèles qui se chicanent.
+- Les signes divins arrivent POUR VRAI à l'écran : pluie de grenouilles,
+  chat qui parle, éclair sur le voisin, témoin qui surgit, lumière divine...
+- L'écran de ton poste affiche aussi l'appel quand tu es debout.
+
+PACK DE PERSONNAGES
+- Personnages générés : visage animé, 16 coiffures, lunettes, moustache,
+  barbe, cravate, boucles d'oreilles, casque d'écoute, enfants, aînés...
+- Les collègues sont maintenant de vrais personnages : ils tapent au
+  clavier, te regardent, prennent leurs propres appels, se lèvent pour
+  aller porter le café de Dieu ou boire de l'eau bénite.
+- Événement : un collègue peut se faire « recompiler » sous tes yeux.
+
+AMBIANCE ET GRAPHISMES
+- Éclairage beaucoup plus sombre et dramatique, brouillard volumétrique,
+  plancher de marbre qui reflète, pierre et bois texturés.
+- Les écrans de Dieu : un OEIL géant qui te suit, cligne et rougit
+  quand Dieu s'énerve.
+- Tapis rouge, baies de serveurs de la simulation, plantes, fontaine.
+- Nouvelle interface (HUD) avec heure, quota, exposition, objectif.
+- Polices incluses (licences libres, dossier fonts/).
+- Le décor est fusionné automatiquement au chargement : environ 3 fois
+  moins d'appels de rendu, donc plus fluide.
+
+SONS ET MUSIQUE (tous générés, libres de droits)
+- Ambiance de cathédrale-bureau, sonnerie de vieux téléphone,
+  claviers des collègues, pas, cha-ching des ventes, voix de Dieu,
+  tonnerre, grenouilles, chat, cloche de fin de quart, battements de coeur
+  quand l'exposition monte, musique du menu.
+- RADIO sur ton bureau : 3 postes (musique d'ascenseur céleste,
+  grégorien, 8-bit).
+
+PASSE-TEMPS ENTRE LES APPELS
+- Basket de prières : prends du papier sur ton bureau (E), lance-le dans
+  la poubelle des PRIÈRES REJETÉES (clic gauche) : +5 $ par panier.
+- Mini-jeu sur le terminal : CHASSE AUX PÉCHÉS (20 secondes).
+- Jaser avec les collègues (E sur leur chaise) : potins et trucs.
+- Eau bénite à la fontaine : fait baisser l'exposition.
+- Événements : pannes, Dieu qui éternue, notes de service absurdes.
+
+MENU ET FIN DE SEMAINE
+- Menu avec l'équipe en 3D devant l'oeil de Dieu (qui suit ta souris).
+- Réglage du SON (100 %, 60 %, 30 %, coupé).
+- La Gazette de la Terre en vrai journal.
+- Fin de semaine : PHOTO DE FAMILLE des fidèles convertis, à sauvegarder
+  en image avec le bouton SAUVEGARDER LA CARTE.
+- Le mode hors ligne (sans clé API) juge un peu tes arguments : la
+  longueur, les mots convaincants, et il punit la répétition.
+
+-------------------------------------------------------------
+COMMANDES
+-------------------------------------------------------------
+  WASD déplacer | Souris regarder | Shift courir | Espace sauter
+  E interagir / s'asseoir / jaser / déposer | Clic gauche lancer
+  Espace répondre (quand ça sonne) | G bouton rouge | 1-8 signes divins
+  F lampe de poche | F2 contours | Échap pause / se lever
+  [1-9] émotes (debout) | [X] gifle | [R] chaise à roulettes
+  Clic droit : couic (poulet) | Clic gauche : LANCER (au visage !)
+  [V] parler | [B] talkie-walkie
+  Agent de Satan : [H] panne  [J] sel dans le café  [K] fuite
+
+CONVERSATIONS IA
+Colle ta clé API dans cle_api.txt (développement seulement : ne jamais
+distribuer le jeu avec une clé dedans). Sans clé, le jeu passe en mode
+hors ligne.
+
+EN CAS DE PROBLÈME
+Si le jeu plante au chargement, il repasse tout seul en graphismes BAS.
+Journal d'erreurs : %APPDATA%\Godot\app_userdata\OH MY GOD\logs\godot.log
+
+-------------------------------------------------------------
+ENGLISH (short)
+-------------------------------------------------------------
+v2.0 : REALITY ECHO. The simulation listens to everything (typed lines,
+  chat, voice chat / mic, Twitch !echo). Jokes, lies and running gags become
+  echoes that come back later, distorted, through 5 tiers: coincidence,
+  behavior, trend, social movement, REALITY REWRITE (the office Earth turns
+  flat, camera-eyed pigeons watch you...). Invented names become callers,
+  promises call back, successful missions bring the spouse on the line,
+  co-op gets crossed prayers, believers may overhear you. Persistent world,
+  archives, mic toggle and world reset in Options.
+v1.2 : the game is now called GOD IS AN AI. New opening cinematic :
+simulation code rain, a flat Earth under its dome, God's giant digital eye,
+"GOD... IS AN AI.", BOOM, title slam, then the menu (any key skips).
+
+v1.1 : DIVINE MISSION ORDERS : every call, pick 1 of 3 secret cards
+(easy / absurd / totally insane) : make the believer adopt a llama,
+believe God is a lobster, marry their vacuum... without ever typing
+the FORBIDDEN WORD. Successful missions come back as callbacks with
+absurd consequences and make the next day's Gazette. Co-op : a friend
+(and Satan's agent) secretly tries to make you type your forbidden
+word. Twitch chat votes the card with !1 / !2 / !3.
+
+v1.0 : FACE DELIVERY : coworkers and friends order items (cream pie,
+donut, fish, stapler...) that God drops from the sky ; house rule : you
+THROW them at their face (splats, screen covered in cream, sniper bonus,
+aim assist). Karaoke prayers with 0-10 score cards, disco mass where you
+must dance, a clumsy intern who spills, bumps and says "simulation",
+the daily hat of shame, and rolling office chair races ([R]).
+
+v0.9 : slapstick update. [X] slap (heads spin, coworkers slap back),
+rubber chicken (squeak / throw : BONK), 3D comic sound words, confetti
+and kazoo on every conversion, T-pose and chicken dance emotes, friends
+fall on their back when they slip, silly webcam gags during calls (phone
+upside down, nose on the lens, stuck dog filter, frozen face, sneeze),
+new God moods : BIG HEAD day and helium leak.
+
+v0.8 : career (XP, 20 levels, titles, 23 achievements, 15 hats and face
+accessories your friends see in co-op), full options screen (volumes,
+FOV, sensitivity, fullscreen...), first-day tutorial, AI relay server so
+the game can be sold without shipping an API key (serveur/), icon,
+splash screen and export presets.
+
+v0.7 : DIVINE ECHOES : God records proximity voice chat ; NPC coworkers
+later repeat your lines in YOUR voice (sometimes pitched), God replays
+them as "exhibit A", friends' voices leak into your calls (crossed line),
+and God's Archives play everyone's best line at the end of the week
+(memory only, can be turned off). Steam invites without IP (needs the
+GodotSteam extension from AssetLib). Optional realistic believer voices
+(OpenAI-compatible TTS, cle_tts.txt). Highlight photos get a banner.
+
+v0.6 : CHAT PLAYS GOD (Twitch, no login) : viewers type !pray <confession>
+and become believers who call you with their username ; !sign, !wrath /
+!joy, !amen. God hears you yell in voice chat. Helium holy water and devil
+mints change your real voice. Cathedral echo. Auto highlight photos of the
+week. JSON mods in user://mods. Streamer mode hides your IP.
+
+v0.4 : video calls where you SEE the believer in their situation (14 sets,
+animated faces, divine signs happen on screen), procedural character
+pack, coworkers that live (type, take calls, walk to the coffee), darker
+lighting, God's tracking eye screens, generated sound and music, desk
+radio, paper basketball, a terminal mini-game, coworker chat, office
+events, a 3D menu, a family photo of converts at the end of the week.
+
+-------------------------------------------------------------
+STRUCTURE DU PROJET / PROJECT LAYOUT
+  autoload/loc.gd        textes FR/EN, réglages, polices
+  autoload/game.gd       état de la semaine, boutique, records
+  autoload/sfx.gd        sons et musique
+  autoload/net.gd        co-op en ligne : héberger, rejoindre, salon
+  autoload/stream.gd     le chat Twitch joue Dieu
+  autoload/steam_net.gd  Steam : salon, invitations, statut (facultatif)
+  autoload/profile.gd    carrière, succès, accessoires
+  autoload/relay.gd      connexion au relais IA (version commerciale)
+  autoload/dev.gd        outils de test (inactif en jeu normal)
+  scripts/netsync.gd     synchronisation en partie
+  scripts/voice.gd       chat vocal de proximité
+  scripts/viral.gd       fil du chat, cris, hélium, moments forts
+  scripts/echoes.gd      Échos divins, ligne croisée, archives de Dieu
+  scripts/cloud_tts.gd   voix réalistes des fidèles (facultatif)
+  scripts/options.gd     écran d'options
+  scripts/career.gd      carrière et vestiaire
+  scripts/tutorial.gd    tutoriel du premier jour
+  scripts/fun.gd         gifles, poulet, onomatopées, confettis, humeurs
+  scripts/delivery.gd    livraisons en pleine face
+  scripts/karaoke.gd     prière karaoké
+  scripts/intern.gd      le stagiaire
+  scripts/chairride.gd   chaises à roulettes
+  scripts/missions.gd    ordres de mission divins
+  scripts/intro.gd       cinématique d'ouverture
+  shaders/cine.gdshader  effets de film de la cinématique
+  intro/                 images de la cinématique (à ajouter)
+  serveur/               relais IA (Cloudflare Workers)
+  scripts/lobby.gd       salon du menu
+  scripts/character.gd   pack de personnages (visage animé)
+  scripts/callview.gd    appel vidéo + décors + signes divins
+  scripts/believers.gd   générateur de fidèles
+  scripts/overlay.gd     Gazette, boutique, évaluation, pause
+  scripts/group_photo.gd photo de famille de fin de semaine
+  scripts/minigame.gd    chasse aux péchés
+  scripts/menu.gd        menu principal
+  main.gd                le bureau et la boucle de jeu
+  shaders/               visage, oeil de Dieu, marbre, contours, webcam
+  audio/                 sons générés (tools/gen_audio.py pour les refaire)
+  fonts/                 polices libres + licences
+  tools/                 scènes et scripts de test
